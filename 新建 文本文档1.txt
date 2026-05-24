@@ -1,0 +1,14 @@
+# 1. 进入项目目录
+cd /d/projects/my-first-project
+# 2. 初始化 Git 仓库
+git init
+# 3. 添加所有文件到暂存区
+git add .
+# 4. 提交到本地仓库
+git commit -m 「第一次提交：初始化项目」
+# 5. 关联 GitHub 远程仓库（HTTPS）
+git remote add origin HTTPS://GitHub.com/zhangsan/my-first-project.git
+# 6. 查看远程仓库是否正确
+git remote -v
+# 7. 第一次推送到 GitHub（假设本地分支是 master，远程是 main）
+git push -u origin master:main
