@@ -22,13 +22,24 @@ class MusicRecommender:
         sd = [s.to_dict() for s in songs[:6]]
         return {"scene": scene, "songs": sd, "llm_analysis": self.llm.recommend_by_scene(scene, sd), "total_found": len(songs)}
 
-    def get_daily_recommendations(self, count: int = 8) -> Dict:
+    def get_daily_recommendations(self, count: int = 12) -> Dict:
         all_songs = self.library.get_all()
         selected, moods = [], set()
+
+        # 第一轮：严格去重，确保多样性
         for s in all_songs:
             if len(selected) >= count: break
             if not set(s.mood).issubset(moods):
                 selected.append(s); moods.update(s.mood)
+
+        # 第二轮：放宽条件，允许部分重复情绪，优先不同流派
+        genres = set(s.genre[0] for s in selected)
+        for s in all_songs:
+            if len(selected) >= count: break
+            if s not in selected and s.genre[0] not in genres:
+                selected.append(s); genres.add(s.genre[0])
+    
+        # 兜底：随机补足
         while len(selected) < count:
             c = self.library.get_random(1)[0]
             if c not in selected: selected.append(c)

@@ -12,3 +12,5 @@ git remote add origin HTTPS://GitHub.com/zhangsan/my-first-project.git
 git remote -v
 # 7. 第一次推送到 GitHub（假设本地分支是 master，远程是 main）
 git push -u origin master:main
+
+关联远程仓库（HTTPS）失败时：设置git使用本地代理：git config --global http.proxy http://127.0.0.1:10809。验证：git config --global -l

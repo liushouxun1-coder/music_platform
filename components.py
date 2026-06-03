@@ -7,7 +7,7 @@ class Theme:
     TEXT_PRIMARY = "#e0e0e0"
     TEXT_SECONDARY = "#888"
     TEXT_ACCENT = "#00f2fe"
-    GRADIENT = "linear-gradient(90deg,#00f2fe,#ff00ff)"
+    GRADIENT = "linear-gradient(90deg,#00f2fe,#4facfe,#ff00ff)"
 
 
 # ========== 全局 CSS ==========
@@ -190,7 +190,7 @@ def render_llm_response(content: str, title: str = "🤖 AI 回复"):
         margin: 1rem 0;
     ">
         <div style="font-weight:bold;background:""" + Theme.GRADIENT + """;-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:0.8rem;font-size:1.1rem">""" + title + """</div>
-        <div style="line-height:1.7;font-size:0.95rem;color:""" + Theme.TEXT_PRIMARY + """>""" + content.replace(chr(10), "<br>") + """</div>
+        <div style="line-height:1.7;font-size:0.95rem;background:""" + Theme.GRADIENT + """;-webkit-background-clip:text;-webkit-text-fill-color:transparent">""" + content.replace(chr(10), "<br>") + """</div>
     </div>
     """, unsafe_allow_html=True)
 

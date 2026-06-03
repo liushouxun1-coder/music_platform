@@ -171,7 +171,7 @@ def on_select_scene(scene):
 
 def on_generate_daily():
     """生成每日推荐的回调"""
-    daily = rec.get_daily_recommendations(6)
+    daily = rec.get_daily_recommendations(12)
     for s in daily["songs"]:
         s["spotify_id"] = spotify.search_track(s["title"], s["artist"])
     st.session_state.daily_recommendations = daily["songs"]
@@ -262,7 +262,7 @@ with tabs[0]:
                     st.markdown("**置信度:** " + str(int(analysis.confidence * 100)) + "%")
                     st.markdown(analysis.reasoning)
                 st.markdown("#### 📝 AI 推荐语")
-                st.markdown(analysis.content)
+                st.markdown(f'<div style="color: #00f2fe; font-size: 1rem; line-height: 1.7;">{analysis.content}</div>',unsafe_allow_html=True)
 
             # 显示歌曲列表 - 关键修复：每首歌独立创建按钮，使用 on_click
             for idx, s in enumerate(songs):
@@ -339,7 +339,7 @@ with tabs[0]:
                     st.markdown("**置信度:** " + str(int(analysis.confidence * 100)) + "%")
                     st.markdown(analysis.reasoning)
                 st.markdown("#### 📝 AI 场景推荐")
-                st.markdown(analysis.content)
+                st.markdown(f'<div style="color: #ff00ff; font-size: 1rem; line-height: 1.7;">{analysis.content}</div>',unsafe_allow_html=True)
 
             for i, s in enumerate(songs, 1):
                 with st.container():
