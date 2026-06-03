@@ -1,6 +1,6 @@
 """精简版 LLM 引擎"""
 import os, random
-from typing import List, Dict, Optional, Generator
+from typing import List, Dict, Optional
 from dataclasses import dataclass, field
 from abc import ABC, abstractmethod
 
@@ -73,7 +73,7 @@ class MockLLMEngine(BaseLLMEngine):
         "悲伤": ["理解您需要{mood}的音乐陪伴。筛选了采用小调式、缓慢节奏的作品。", "为您准备的{mood}音乐：运用钢琴、大提琴等哀婉音色。"],
         "激昂": ["为您挑选{mood}音乐：具有强烈的节奏驱动。", "推荐{mood}风格：通过强烈的鼓点、电吉他失真音色。"],
         "平静": ["为您精选{mood}音乐：采用氛围音乐和极简主义手法。", "推荐{mood}风格：60 BPM左右的节奏接近人体静息心率。"],
-        "愉悦": ["为您推荐{mood}音乐：融合放克、迪斯科元素的流行乐。", "挑选{mood}风格：采用 call and response 结构。"],
+        "愉悦": ["为您推荐{mood}音乐：融合放克、迪斯科元素的流行乐。", "挑选{mood}风格：这些歌曲通常采用 call and response 结构。"],
     }
     _scene_tpl = {
         "跑步": ["针对{scene}场景，推荐节奏120-160 BPM的音乐。", "{scene}音乐推荐：选择能量值>0.7的电子乐或摇滚。"],

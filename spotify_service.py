@@ -11,8 +11,11 @@ class SpotifyService:
     由于 Spotify Web API 需要 OAuth 认证且 2026年限制开发模式，
     这里采用 Embed iframe 方案 + 内置热门歌曲 ID 映射
     """
-    
+
     # 内置热门歌曲 Spotify ID 映射表
+    # 获取方式：在 Spotify 网页版找到歌曲 → 分享 → 复制链接
+    # 链接格式：https://open.spotify.com/track/XXXXXXXXXX
+    # 提取 XXXXXXXXXX 部分作为 ID
     _TRACK_MAP: Dict[str, str] = {
         # 中文歌曲
         "阳光宅男": "4wTChU0tU44TAMmRz1sB2H",
@@ -23,7 +26,7 @@ class SpotifyService:
         "奔跑": "4xTChU0tU44TAMmRz1sB2H",
         "天空之城": "5yTChU0tU44TAMmRz1sB2H",
         "故乡的原风景": "6zTChU0tU44TAMmRz1sB2H",
-        
+
         # 英文歌曲
         "happy": "60nZcImufyMA1MKQY3dcCH",
         "someone like you": "4kflIGfjdZJW4ot2ioixTB",
@@ -34,15 +37,15 @@ class SpotifyService:
         "river flows in you": "3zKjz7Su14KRJ1S2u3vR4T",
         "a thousand years": "4aLjz7Su14KRJ1S2u3vR4T",
         "canon in d": "5bMjz7Su14KRJ1S2u3vR4T",
-        
+
         # 古典/纯音乐
         "月光奏鸣曲": "6cNjz7Su14KRJ1S2u3vR4T",
         "夜曲": "7dOjz7Su14KRJ1S2u3vR4T",
     }
-    
+
     def __init__(self):
         pass
-    
+
     def search_track(self, title: str, artist: str = "") -> Optional[str]:
         """
         查找歌曲的 Spotify ID
@@ -50,21 +53,21 @@ class SpotifyService:
         """
         key = title.lower().strip()
         track_id = self._TRACK_MAP.get(key)
-        
+
         if track_id:
             return track_id
-        
+
         # 尝试模糊匹配
         for k, v in self._TRACK_MAP.items():
             if key in k or k in key:
                 return v
-        
+
         return None
-    
+
     def get_embed_url(self, track_id: str) -> str:
         """生成 Spotify Embed URL"""
         return f"https://open.spotify.com/embed/track/{track_id}?utm_source=generator&theme=0"
-    
+
     def get_embed_html(self, track_id: str, height: int = 352) -> str:
         """生成嵌入播放器 HTML"""
         url = self.get_embed_url(track_id)

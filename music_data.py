@@ -21,7 +21,7 @@ class Song:
     @property
     def duration_str(self) -> str:
         return f"{self.duration//60}:{self.duration%60:02d}"
-    
+
     def to_dict(self) -> Dict:
         return {
             "id": self.id, "title": self.title, "artist": self.artist, "album": self.album,
